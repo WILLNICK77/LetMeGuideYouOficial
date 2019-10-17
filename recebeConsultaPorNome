@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+    <html lang="pt-br">
+      <head>
+        <title>Revisão 1º Semestre</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <meta charset="utf-8">
+      </head>
+      <body>
+    		<div class="jumbotron">
+            <?php
+              $nomeConsulta = $_GET["nome"];
+            ?>
+            <h1> Resultado da busca por "<?php echo $nomeConsulta; ?>" </h1>
+            <?php 
+              include_once "menu.php";
+              require_once "usuario.class.php";
+
+              $objUsuario = new ();
+              $resultado = $objUsuario->consultaPorNome($nomeConsulta);
+            
+            ?>
+
+             <table class="table table-borderd">
+            <tr>
+              <th> Código </th>
+              <th> Nome </th>
+              <th> Email</th>
+              <th> Senha</th>
+            </tr>
+          <?php
+            foreach($resultado AS $usuario){
+              echo "<tr>";
+              foreach($usuario AS $campo=>$valor){
+                  echo "<td> $valor </td>";
+              }
+              echo "</tr>";
+            }
+
+          ?>
+          </table>
+      		</div>
+      </body>
+    </html>
